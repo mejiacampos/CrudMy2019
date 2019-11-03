@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">CrudMy2019</string>
+    <string name="title_activity_main2">main2activity</string>
+
+    <string name="action_settings">Nuevo Registro</string>
+    <string name="listarticulos">Lista Spinner</string>
+    <string name="listarticulos1">Lista Listview</string>
+
+    <string name="salir">Salir</string>
+    <string name="usuario">Registrarme Ahora</string>
+    <string name="pass">¿Se te Olvido tu Contraseña?</string>
+    <string name="register"><u><b><i>Copyright</i></b></u></string>
+
 </resources>
