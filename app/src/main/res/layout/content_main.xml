@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#303F50"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="serif-monospace"
+        android:text="Crud Mysql/njava-Android"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:src="@drawable/mysql2"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/et_codigo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingrese el Codigo"
+                android:inputType="number"
+                android:background="@drawable/estiloedittext"
+                android:shadowRadius="5"
+                android:paddingLeft="25dp"
+                android:drawableStart="@drawable/ic_hola"
+                android:drawablePadding="5dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/et_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingrese la Descripcion del Articulo"
+                android:layout_marginRight="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/estiloedittext"
+                android:paddingLeft="25dp"
+                android:drawableStart="@drawable/ic_descripcion"
+                android:drawablePadding="5dp"/>
+            
+        </LinearLayout>
+        
+    </ScrollView>
+
+</LinearLayout>
