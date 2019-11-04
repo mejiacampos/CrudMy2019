@@ -3,13 +3,19 @@ package com.example.crudmy2019;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -245,6 +251,95 @@ public class MainActivity extends AppCompatActivity {
             et_descripcion.setText(null);
             et_precio.setText(null);
         }
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) { getMenuInflater().inflate(R.menu.menu_main, menu);
+            return true;
+        }
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == R.id.action_limpiar) {
+                et_codigo.setText(null);
+                et_descripcion.setText(null);
+                et_precio.setText(null);
+                return true;
+            }else if(id == R.id.action_listaArticulos){
+                Intent spinnerActivity = new Intent(MainActivity.this, Consulta_RecyclerView.class);
+                startActivity(spinnerActivity);
+                return true;
+            }else if(id == R.id.action_salir){
+                DialogConfirmacion();
+                return true;
+            }
 
-    }
-}
+            return super.onOptionsItemSelected(item);
+        }
+        private void DialogConfirmacion(){
+            //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            String mensaje = "¿Realmente desea salir?";
+            dialogo = new AlertDialog.Builder(MainActivity.this);
+            dialogo.setIcon(R.drawable.ic_close);
+            dialogo.setTitle("Advertencia");
+            dialogo.setMessage(mensaje);
+            dialogo.setCancelable(false);
+            dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo, int id) {
+                    MainActivity.this.finishAffinity();
+                }
+            });
+            dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo, int id) {
+                    Toast.makeText(getApplicationContext(), "Operación Cancelada.", Toast.LENGTH_LONG).show();
+                }
+            });
+            dialogo.show();
+        }
+        void Hilo(){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for(int i=1; i<=1; i++){
+                        demora();
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String cod = getSharedCodigo(MainActivity.this);
+                            String des = getSharedDescripcion(MainActivity.this);
+                            String pre = getSharedPrecio(MainActivity.this);
+
+                            et_codigo.setText(cod);
+                            et_descripcion.setText(des);
+                            et_precio.setText(pre);
+                        }
+                    });
+                }
+            }).start();
+        }
+
+
+        private void demora(){
+            try{
+                Thread.sleep(1000);
+            }catch (InterruptedException e){}
+        }
+
+
+        public String getSharedCodigo(Context context) {
+            SharedPreferences preferences = context.getSharedPreferences("profeGamez", MODE_PRIVATE);
+            String codigo = preferences.getString("codigo","0");
+            return codigo;
+        }
+
+        public String getSharedDescripcion(Context context) {
+            SharedPreferences preferences = context.getSharedPreferences("profeGamez", MODE_PRIVATE);
+            String descripcion = preferences.getString("descripcion","Sin descripción");
+            return descripcion;
+        }
+
+        public String getSharedPrecio(Context context) {
+            SharedPreferences preferences = context.getSharedPreferences("profeGamez", MODE_PRIVATE);
+            String precio = preferences.getString("precio","0.0");
+            return precio;
+        }
+        }
